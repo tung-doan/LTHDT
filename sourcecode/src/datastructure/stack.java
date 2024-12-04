@@ -32,7 +32,7 @@ class Stack extends Datastructure {
 
 	@Override
 	public void display() {
-
+		System.out.println("Stack: " + elements);
 	}
 
 	public void push(int element) {
@@ -51,16 +51,6 @@ class Stack extends Datastructure {
 			throw new IllegalStateException("Stack is empty");
 		}
 		return elements.get(top);
-	}
-
-	public static void main(String args[]) {
-		Stack stack = new Stack();
-		stack.push(1);
-		System.out.println(stack.peek());
-		stack.push(2);
-		System.out.println(stack.peek());
-		stack.pop();
-		System.out.println(stack.peek());
 	}
 
 }
