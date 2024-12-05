@@ -1,15 +1,14 @@
 package datastructure;
 
-import java.util.ArrayList;
-import java.util.List;
-
 abstract class Datastructure {
 	protected int size;
-	protected List<Integer> elements;
+	protected int[] elements;
+	int capacity;
 
-	public Datastructure() {
-		elements = new ArrayList<>();
+	public Datastructure(int capa) {
+		capacity = capa;
 		size = 0;
+		elements = new int[capacity];
 	}
 
 	public abstract void create();
@@ -25,6 +24,14 @@ abstract class Datastructure {
 	};
 
 	protected abstract void delete(int element);
+
+	protected void resize() {
+		int newcapacity = capacity * 2;
+		int[] newelements = new int[newcapacity];
+		System.arraycopy(elements, 0, newelements, 0, size);
+		elements = newelements;
+		capacity = newcapacity;
+	}
 
 	public abstract void display();
 }
