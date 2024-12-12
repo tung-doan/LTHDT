@@ -75,14 +75,17 @@ public class List extends Datastructure {
     }
 
     // display 
-    public void display() {
-        System.out.print("List: ");
-        for (int i = 0; i < size; i++) {
-            System.out.print(elements[i] + " ");
+    public String display() {
+        if (size == 0) {
+            return "List is empty.";
         }
-        System.out.println();
+        StringBuilder result = new StringBuilder("List: ");
+        for (int i = 0; i < size; i++) {
+            result.append(elements[i]).append(" ");
+        }
+        return result.toString().trim(); 
     }
-
+    
     // sort 
     public void sort() {
         if (size  <= 1) return; 
