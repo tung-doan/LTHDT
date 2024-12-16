@@ -20,7 +20,7 @@ public class InsertMenuController {
         Button confirmButton = new Button("Insert");
         
         insertMenu.getChildren().addAll(instructionLabel, elementInput, positionInput, confirmButton);
-        insertMenu.setAlignment(Pos.BOTTOM_CENTER);
+        insertMenu.setAlignment(Pos.TOP_LEFT);
 
         confirmButton.setOnAction(e -> {
             // Placeholder for insert logic

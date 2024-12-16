@@ -1,20 +1,27 @@
 package view;
 
 import controller.*;
+import datastructure.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
-import utility.ButtonUtils;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import utility.*;
 
 public class ListScene {
-    
-    public ListScene() {
 
+    private List list; // Instance of the List data structure
+    private VBox currentVBox = null; // To track the current VBox displayed
+    private HBox listVisualization; // Visualization of the List
+
+    public ListScene() {
+        // Initialize the List with a default capacity
+        this.list = new List(10);
     }
 
     public Scene createListScene(SceneController sceneController) {
@@ -31,56 +38,60 @@ public class ListScene {
         HBox operationButtons = createOperationButtons(sceneController);
         root.setLeft(operationButtons);
 
-        return new Scene(root, 800, 600);
+        // List Visualization
+        listVisualization = new HBox(10);
+        listVisualization.setAlignment(Pos.TOP_LEFT);
+        listVisualization.setPadding(new Insets(5));
+        listVisualization.setPrefWidth(800);  
+        listVisualization.setPrefHeight(400);
+        root.setRight(listVisualization);
+
+        return new Scene(root, 1000, 1000);
     }
-    private VBox currentVBox = null;
+
     private HBox createOperationButtons(SceneController sceneController) {
         VBox buttonLayout = new VBox(10);
         buttonLayout.setPadding(new Insets(10));
-        buttonLayout.setAlignment(Pos.BOTTOM_LEFT);
-    
+        buttonLayout.setPrefWidth(100); 
+        buttonLayout.setPrefHeight(400);
+        buttonLayout.setAlignment(Pos.TOP_LEFT);
+
         Button createButton = ButtonUtils.createStyledButton("Create");
         Button insertButton = ButtonUtils.createStyledButton("Insert");
         Button deleteButton = ButtonUtils.createStyledButton("Delete");
         Button sortButton = ButtonUtils.createStyledButton("Sort");
         Button findButton = ButtonUtils.createStyledButton("Find");
         Button backButton = ButtonUtils.createStyledButton("Back");
+
         buttonLayout.getChildren().addAll(createButton, insertButton, deleteButton, sortButton, findButton, backButton);
-    
-        HBox UserInteractSpace = new HBox(10);
-        UserInteractSpace.setPadding(new Insets(10));
-        UserInteractSpace.setAlignment(Pos.BOTTOM_CENTER);
-        UserInteractSpace.getChildren().add(buttonLayout);
-    
-        // Track the currently displayed VBox
-        
-    
-        // Set up button actions to open operation-specific menus
+
+        HBox userInteractSpace = new HBox(10);
+        userInteractSpace.setPadding(new Insets(10));
+        userInteractSpace.setAlignment(Pos.TOP_LEFT);
+        userInteractSpace.getChildren().add(buttonLayout);
+
+        // Set up button actions
         createButton.setOnAction(e -> {
-            ButtonUtils.highlightButton(createButton);
-            replaceCurrentVBox(UserInteractSpace, CreateMenuController.createMenu());
+            replaceCurrentVBox(userInteractSpace, CreateMenuController.createMenu(list, this::updateVisualization));
         });
         insertButton.setOnAction(e -> {
-            ButtonUtils.highlightButton(insertButton);
-            replaceCurrentVBox(UserInteractSpace, InsertMenuController.createMenu());
+
         });
         deleteButton.setOnAction(e -> {
-            ButtonUtils.highlightButton(deleteButton);
-            replaceCurrentVBox(UserInteractSpace, DeleteMenuController.createMenu());
+
         });
         sortButton.setOnAction(e -> {
-            ButtonUtils.highlightButton(sortButton);
-            replaceCurrentVBox(UserInteractSpace, SortMenuController.createMenu());
+            list.sort();
+            updateVisualization();
         });
         findButton.setOnAction(e -> {
-            ButtonUtils.highlightButton(findButton);
-            replaceCurrentVBox(UserInteractSpace, FindMenuController.createMenu());
+
         });
         backButton.setOnAction(e -> sceneController.switchTo("Main"));
-    
-        return UserInteractSpace;
+
+        return userInteractSpace;
     }
-    
+
     // Helper method to replace the current VBox
     private void replaceCurrentVBox(HBox container, VBox newVBox) {
         if (currentVBox != null) {
@@ -89,5 +100,22 @@ public class ListScene {
         container.getChildren().add(newVBox);
         currentVBox = newVBox;
     }
-    
+
+    // Method to update the visualization of the List
+    private void updateVisualization() {
+        listVisualization.getChildren().clear(); 
+
+        for (int i = 0; i < list.getSize(); i++) {
+            int element = list.getElements()[i]; 
+
+            Rectangle rectangle = new Rectangle(50, 50);
+            rectangle.setFill(Color.LIGHTBLUE);
+            rectangle.setStroke(Color.BLACK);
+
+            Text text = new Text(String.valueOf(element));
+            StackPane stackPane = new StackPane(rectangle, text);
+
+            listVisualization.getChildren().add(stackPane); 
+        }
+    }
 }

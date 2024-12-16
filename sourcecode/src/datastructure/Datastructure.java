@@ -11,7 +11,7 @@ abstract class Datastructure {
 		elements = new int[capacity];
 	}
 
-	public abstract void create();
+	public abstract void create(int capacity);
 
 	protected abstract void insert(int element);
 
@@ -19,8 +19,9 @@ abstract class Datastructure {
 		System.out.println("Sort method not implemented");
 	};
 
-	public void find(int element) {
+	public int find(int element) {
 		System.out.println("find method not implemented");
+		return -1;
 	};
 
 	protected abstract void delete(int element);

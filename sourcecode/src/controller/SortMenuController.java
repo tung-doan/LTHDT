@@ -15,7 +15,7 @@ public class SortMenuController {
         Button descendingButton = new Button("Sort Descending");
         
         sortMenu.getChildren().addAll(instructionLabel, ascendingButton, descendingButton);
-        sortMenu.setAlignment(Pos.BOTTOM_CENTER);
+        sortMenu.setAlignment(Pos.TOP_LEFT);
 
         ascendingButton.setOnAction(e -> {
             // Placeholder for sort ascending logic

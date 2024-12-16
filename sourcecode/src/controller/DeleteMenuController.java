@@ -18,7 +18,7 @@ public class DeleteMenuController {
         Button confirmButton = new Button("Delete");
         
         deleteMenu.getChildren().addAll(instructionLabel, elementInput, confirmButton);
-        deleteMenu.setAlignment(Pos.BOTTOM_CENTER);
+        deleteMenu.setAlignment(Pos.TOP_LEFT);
 
         confirmButton.setOnAction(e -> {
             // Placeholder for delete logic

@@ -18,7 +18,7 @@ public class FindMenuController {
         Button findButton = new Button("Find");
         
         findMenu.getChildren().addAll(instructionLabel, elementInput, findButton);
-        findMenu.setAlignment(Pos.BOTTOM_CENTER);
+        findMenu.setAlignment(Pos.TOP_LEFT);
 
         findButton.setOnAction(e -> {
             // Placeholder for find logic

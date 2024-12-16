@@ -1,7 +1,9 @@
 package datastructure;
 
-public class List extends Datastructure {
+import java.util.Random;
 
+public class List extends Datastructure {
+    Random random = new Random();
     // constructor
     public List(int capacity) {
         super(capacity);
@@ -10,6 +12,10 @@ public class List extends Datastructure {
     // utility function
     public int getSize() {
         return size;
+    }
+
+    public int[] getElements() {
+        return elements;
     }
 
     public boolean isEmpty() {
@@ -33,7 +39,7 @@ public class List extends Datastructure {
             elements[i + 1] = elements[i];
         }
         elements[index] = element;
-         size ++;
+        size ++;
     }
 
     // delete at index
@@ -51,14 +57,24 @@ public class List extends Datastructure {
 
     @Override
     // create
-    public void create(){
-        elements = new int[capacity];
-        size = 0;
+    public void create(int capacity) {
+        this.capacity = capacity; 
+        elements = new int[capacity]; 
+        size = 0; 
+    }   
+
+    public void createRandom(int size) {
+        elements = new int[size];  
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            elements[i] = random.nextInt(100);  
+        }
+        this.size = size;  
     }
 
     // insert at the end
     public void insert(int element) {
-       if (isFull()) {
+        if (isFull()) {
             resize(); 
         }
         elements[size] = element;
@@ -75,16 +91,7 @@ public class List extends Datastructure {
     }
 
     // display 
-    public String display() {
-        if (size == 0) {
-            return "List is empty.";
-        }
-        StringBuilder result = new StringBuilder("List: ");
-        for (int i = 0; i < size; i++) {
-            result.append(elements[i]).append(" ");
-        }
-        return result.toString().trim(); 
-    }
+    public void display() {       }
     
     // sort 
     public void sort() {
@@ -104,9 +111,9 @@ public class List extends Datastructure {
     public int find(int element) {
         for (int i = 0; i < size; i++) {
             if (elements[i] == element) {
-                return i; // trả về vị trí tìm được phần tử
+                return i; 
             }
         }
-        return -1; // không tìm thấy
+        return -1; 
     }
 }
