@@ -1,6 +1,6 @@
 package datastructure;
 
-class Stack extends Datastructure {
+public class Stack extends Datastructure {
 	private int top;
 
 	public Stack(int capa) {
@@ -8,14 +8,12 @@ class Stack extends Datastructure {
 		top = -1;
 	}
 
-	@Override
 	public void create() {
 		elements = new int[capacity];
 		size = 0;
 		top = -1;
 	}
 
-	@Override
 	protected void insert(int element) {
 		if (size == capacity) {
 			resize();
@@ -24,7 +22,6 @@ class Stack extends Datastructure {
 		size++;
 	}
 
-	@Override
 	protected void delete(int element) {
 		if (top == -1) {
 			throw new IllegalStateException("Stack is empty");
@@ -33,7 +30,6 @@ class Stack extends Datastructure {
 		size--;
 	}
 
-	@Override
 	public void display() {
 		if (size > 0) {
 			for (int i = 0; i < size; i++) {
@@ -50,10 +46,18 @@ class Stack extends Datastructure {
 		delete(top);
 	}
 
+	public int getsize() {
+		return size;
+	}
+
 	public int peek() {
 		if (top == -1) {
 			throw new IllegalStateException("Stack is empty");
 		}
 		return elements[top];
+	}
+
+	public static void main(String args[]) {
+		System.out.println("1");
 	}
 }
