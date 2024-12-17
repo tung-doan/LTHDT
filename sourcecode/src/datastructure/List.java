@@ -1,5 +1,6 @@
 package datastructure;
 
+import java.util.Random;
 public class List extends Datastructure {
 
 	// constructor
@@ -22,6 +23,10 @@ public class List extends Datastructure {
 
 	public boolean isFull() {
 		return size == capacity;
+	}
+
+	public int[] getElements() {
+		return elements;
 	}
 	
 	// insert at index
@@ -60,6 +65,18 @@ public class List extends Datastructure {
 		size = 0;
 	}
 
+	public void createRandom(int newSize) {
+		if (newSize > capacity) {
+			while (capacity < newSize) {
+				resize();
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < newSize; i++) {
+			elements[i] = random.nextInt(100);
+		}
+		size = newSize;
+	}
 	// insert at the end
 	public void insert(int element) {
 		if (isFull()) {
