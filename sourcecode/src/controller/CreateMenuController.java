@@ -36,7 +36,7 @@ public class CreateMenuController {
             if (!userDefinedAdded[0]) {
                 Label userDefinedLabel = new Label("Enter the list (comma-separated):");
                 TextField userDefinedInput = new TextField();
-                Button confirmButton = new Button("Confirm");
+                Button confirmButton = new Button("Create");
 
                 createMenu.getChildren().addAll(userDefinedLabel, userDefinedInput, confirmButton);
 
