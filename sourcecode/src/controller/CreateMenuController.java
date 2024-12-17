@@ -18,7 +18,7 @@ public class CreateMenuController {
 
         createMenu.getChildren().addAll(sizeLabel, sizeInput, randomButton, userDefinedButton);
         createMenu.setAlignment(Pos.TOP_LEFT);
-        createMenu.setPrefWidth(200);  
+        createMenu.setPrefWidth(150);  
         createMenu.setPrefHeight(200);
 
         randomButton.setOnAction(e -> {

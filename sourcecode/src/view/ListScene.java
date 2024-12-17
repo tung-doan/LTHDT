@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import controller.*;
 import datastructure.List;
 import javafx.geometry.Insets;
@@ -17,11 +19,12 @@ public class ListScene {
 
     private List list; // Instance of the List data structure
     private VBox currentVBox = null; // To track the current VBox displayed
+    private ArrayList<StackPane> rectanglePanes;
     private HBox listVisualization; // Visualization of the List
 
     public ListScene() {
-        // Initialize the List with a default capacity
         this.list = new List(10);
+        this.rectanglePanes = new ArrayList<>();
     }
 
     public Scene createListScene(SceneController sceneController) {
@@ -75,17 +78,17 @@ public class ListScene {
             replaceCurrentVBox(userInteractSpace, CreateMenuController.createMenu(list, this::updateVisualization));
         });
         insertButton.setOnAction(e -> {
-
+            replaceCurrentVBox(userInteractSpace, InsertMenuController.createMenu(list, this::updateVisualization, this::highlightRectangle));
         });
         deleteButton.setOnAction(e -> {
-
+            replaceCurrentVBox(userInteractSpace, DeleteMenuController.createMenu(list, this::updateVisualization));        
         });
         sortButton.setOnAction(e -> {
             list.sort();
             updateVisualization();
         });
         findButton.setOnAction(e -> {
-
+            replaceCurrentVBox(userInteractSpace, FindMenuController.createMenu(list, this::highlightRectangle));
         });
         backButton.setOnAction(e -> sceneController.switchTo("Main"));
 
@@ -103,10 +106,12 @@ public class ListScene {
 
     // Method to update the visualization of the List
     private void updateVisualization() {
-        listVisualization.getChildren().clear(); 
+        listVisualization.getChildren().clear();
+        rectanglePanes.clear();
 
+        int[] elements = list.getElements();
         for (int i = 0; i < list.getSize(); i++) {
-            int element = list.getElements()[i]; 
+            int element = elements[i];
 
             Rectangle rectangle = new Rectangle(50, 50);
             rectangle.setFill(Color.LIGHTBLUE);
@@ -114,8 +119,20 @@ public class ListScene {
 
             Text text = new Text(String.valueOf(element));
             StackPane stackPane = new StackPane(rectangle, text);
+            rectanglePanes.add(stackPane);
 
-            listVisualization.getChildren().add(stackPane); 
+            listVisualization.getChildren().add(stackPane);
+        }
+    }
+
+    // Method to highlight a specific rectangle
+    private void highlightRectangle(int index) {
+        for (StackPane pane : rectanglePanes) {
+            ((Rectangle) pane.getChildren().get(0)).setFill(Color.LIGHTBLUE);
+        }
+
+        if (index >= 0 && index < rectanglePanes.size()) {
+            ((Rectangle) rectanglePanes.get(index).getChildren().get(0)).setFill(Color.YELLOW);
         }
     }
 }
