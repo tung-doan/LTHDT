@@ -45,7 +45,8 @@ public class CreateMenuController {
                 confirmButton.setOnAction(event -> {
                     String input = userDefinedInput.getText();
                     String[] elements = input.split(",");
-                    list.create(elements.length); 
+                    list.setCapacity(elements.length);
+                    list.create(); 
                     try {
                         for (String element : elements) {
                             list.insert(Integer.parseInt(element.trim()));
