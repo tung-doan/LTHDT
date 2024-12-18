@@ -17,10 +17,12 @@ public class App extends Application {
 
         // Create scenes
         MainScene mainScene = new MainScene();
-        ListScene listScene = new ListScene();
+        MenuScene menuScene = new MenuScene();
+        ListScene listScene = new ListScene();        
 
         // Set up scene switching logic
         sceneController.addScene("Main", mainScene.createMainScene(sceneController));
+        sceneController.addScene("Menu", menuScene.createMenuScene(sceneController));
         sceneController.addScene("List", listScene.createListScene(sceneController));
 
         // Set initial scene and show stage
