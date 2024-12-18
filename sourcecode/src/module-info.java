@@ -8,4 +8,5 @@ module OOPProject {
 
 	exports app;
 	exports controller;
+	exports datastructure;
 }

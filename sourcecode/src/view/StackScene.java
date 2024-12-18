@@ -1,5 +1,7 @@
 package view;
 
+import controller.CreateMenuController;
+import controller.PushMenuController;
 import controller.SceneController;
 import datastructure.Stack;
 import javafx.geometry.Insets;
@@ -9,12 +11,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import utility.ButtonUtils;
 
@@ -24,14 +27,11 @@ public class StackScene {
 	private VBox currentVBox = null; // To track the current VBox displayed
 	private VBox stackVisualization; // Visualization of the Stack
 
-	public StackScene() {
-		// Initialize the Stack
-		this.stack = new Stack(10); // Default size 10
-	}
-
 	public Scene createStackScene(SceneController sceneController) {
 		BorderPane root = new BorderPane();
 		root.setPadding(new Insets(10));
+		this.stack = new Stack(5);
+		stack.createRandom(5);
 
 		// Title
 		Label title = new Label("Stack Operations");
@@ -43,14 +43,22 @@ public class StackScene {
 		HBox operationButtons = createOperationButtons(sceneController);
 		root.setLeft(operationButtons);
 
-		// Stack Visualization
+		// Stack Visualization with ScrollPane
 		stackVisualization = new VBox(10);
 		stackVisualization.setAlignment(Pos.BOTTOM_CENTER);
 		stackVisualization.setPadding(new Insets(5));
 		stackVisualization.setPrefWidth(300);
-		stackVisualization.setPrefHeight(400);
-		root.setRight(stackVisualization);
 
+		// ScrollPane to add scrolling capability
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setContent(stackVisualization);
+		scrollPane.setFitToWidth(true); // Đảm bảo vừa với chiều rộng
+		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // Luôn hiển thị thanh cuộn
+		scrollPane.setPannable(true); // Cho phép kéo nội dung bằng chuột
+
+		// Thêm ScrollPane vào phần phải (thay vì VBox trực tiếp)
+		root.setRight(scrollPane);
+		updateVisualization();
 		return new Scene(root, 1000, 600);
 	}
 
@@ -74,16 +82,12 @@ public class StackScene {
 		userInteractSpace.setAlignment(Pos.TOP_LEFT);
 		userInteractSpace.getChildren().add(buttonLayout);
 
-		// Set up button actions
 		createButton.setOnAction(e -> {
-			stack.create(); // Reinitialize stack
-			updateVisualization();
+			replaceCurrentVBox(userInteractSpace, CreateMenuController.createMenu(stack, this::updateVisualization));
 		});
 
 		pushButton.setOnAction(e -> {
-			int newValue = (int) (Math.random() * 100); // Generate random value
-			stack.push(newValue);
-			updateVisualization();
+			replaceCurrentVBox(userInteractSpace, PushMenuController.createPushMenu(stack, this::updateVisualization));
 		});
 
 		popButton.setOnAction(e -> {
@@ -109,20 +113,54 @@ public class StackScene {
 		return userInteractSpace;
 	}
 
-	// Method to update the visualization of the Stack
+	private void replaceCurrentVBox(HBox container, VBox newVBox) {
+		if (currentVBox != null) {
+			container.getChildren().remove(currentVBox);
+		}
+		container.getChildren().add(newVBox);
+		currentVBox = newVBox;
+	}
+
 	private void updateVisualization() {
 		stackVisualization.getChildren().clear();
 
-		for (int i = stack.getsize() - 1; i >= 0; i--) {
-			int element = stack.getElements()[i];
-			Rectangle rectangle = new Rectangle(80, 40);
-			rectangle.setFill(Color.LIGHTGREEN);
-			rectangle.setStroke(Color.BLACK);
+		int[] elements = stack.getElements();
+		stack.display();
+		int size = stack.getsize();
+
+		for (int i = 0; i < size; i++) {
+			int element = elements[size - 1 - i];
+
+			Circle circle = new Circle(25, Color.LIGHTGREEN);
+			circle.setStroke(Color.BLACK);
 
 			Text text = new Text(String.valueOf(element));
-			StackPane stackPane = new StackPane(rectangle, text);
 
-			stackVisualization.getChildren().add(stackPane);
+			String positionText = "";
+			if (i == 0)
+				positionText = "head/" + i;
+			else if (i == size - 1)
+				positionText = "tail/" + i;
+			Text positionLabel = new Text(positionText);
+			positionLabel.setFill(Color.RED);
+			// Gộp node và label vào VBox
+			VBox node = new VBox(-5);
+			node.setPadding(new Insets(0));
+			node.setAlignment(Pos.CENTER);
+			// Tạo StackPane cho Circle và Text
+			StackPane stackPane = new StackPane(circle, text);
+			node.getChildren().addAll(stackPane, positionLabel);
+			// Thêm arrow nếu không phải node cuối cùng
+			stackVisualization.getChildren().add(node);
+			if (i < size - 1) {
+				Text arrowText = new Text("↓");
+				arrowText.setStyle("-fx-font-size: 30px;");
+				VBox arrow = new VBox(-10);
+				arrow.setPadding(new Insets(0));
+				arrow.setAlignment(Pos.CENTER);
+				arrow.getChildren().add(arrowText);
+				stackVisualization.getChildren().add(arrow);
+			}
 		}
 	}
 

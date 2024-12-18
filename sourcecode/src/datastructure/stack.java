@@ -1,5 +1,7 @@
 package datastructure;
 
+import java.util.Random;
+
 public class Stack extends Datastructure {
 	private int top;
 
@@ -23,6 +25,10 @@ public class Stack extends Datastructure {
 	}
 
 	protected void delete(int element) {
+		throw new UnsupportedOperationException("Stack does not support deleting specific elements.");
+	}
+
+	protected void delete() {
 		if (top == -1) {
 			throw new IllegalStateException("Stack is empty");
 		}
@@ -43,7 +49,7 @@ public class Stack extends Datastructure {
 	}
 
 	public void pop() {
-		delete(top);
+		delete();
 	}
 
 	public int getsize() {
@@ -57,7 +63,17 @@ public class Stack extends Datastructure {
 		return elements[top];
 	}
 
-	public static void main(String args[]) {
-		System.out.println("1");
+	public void createRandom(int newSize) {
+		if (newSize > capacity) {
+			while (capacity < newSize) {
+				resize();
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < newSize; i++) {
+			elements[i] = random.nextInt(100);
+		}
+		size = newSize;
+		top = size - 1;
 	}
 }

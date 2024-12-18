@@ -1,6 +1,8 @@
 package controller;
 
+import datastructure.Datastructure;
 import datastructure.List;
+import datastructure.Stack;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -11,7 +13,7 @@ import utility.AlertUtils;
 
 public class CreateMenuController {
 
-	public static VBox createMenu(List list, Runnable updateVisualization) {
+	public static VBox createMenu(Datastructure datastructure, Runnable updateVisualization) {
 		VBox createMenu = new VBox(10);
 
 		Label sizeLabel = new Label("Enter size of the list:");
@@ -27,7 +29,7 @@ public class CreateMenuController {
 		randomButton.setOnAction(e -> {
 			try {
 				int size = Integer.parseInt(sizeInput.getText());
-				list.createRandom(size);
+				datastructure.createRandom(size);
 				updateVisualization.run();
 			} catch (NumberFormatException ex) {
 				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer for the size of the list.",
@@ -49,9 +51,15 @@ public class CreateMenuController {
 				confirmButton.setOnAction(event -> {
 					String input = userDefinedInput.getText();
 					String[] elements = input.split(",");
+					if (datastructure instanceof Stack)
+						((Stack) datastructure).create();
 					try {
 						for (String element : elements) {
-							list.insert(Integer.parseInt(element.trim()));
+							if (datastructure instanceof List)
+								((List) datastructure).insert(Integer.parseInt(element.trim()));
+							else if (datastructure instanceof Stack) {
+								((Stack) datastructure).push(Integer.parseInt(element.trim()));
+							}
 						}
 						updateVisualization.run();
 					} catch (NumberFormatException ex) {
