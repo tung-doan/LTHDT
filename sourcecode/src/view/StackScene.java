@@ -1,9 +1,5 @@
 package view;
 
-import controller.CreateMenuController;
-import controller.PushMenuController;
-import controller.SceneController;
-import datastructure.Stack;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,8 +15,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import utility.AlertUtils;
-import utility.ButtonUtils;
+import sourcecode.src.controller.CreateMenuController;
+import sourcecode.src.controller.PushMenuController;
+import sourcecode.src.controller.SceneController;
+import sourcecode.src.datastructure.Stack;
+import sourcecode.src.utility.AlertUtils;
+import sourcecode.src.utility.ButtonUtils;
 
 public class StackScene {
 
@@ -108,7 +108,7 @@ public class StackScene {
 			}
 		});
 
-		backButton.setOnAction(e -> sceneController.switchTo("Main"));
+		backButton.setOnAction(e -> sceneController.switchTo("Menu"));
 
 		return userInteractSpace;
 	}
