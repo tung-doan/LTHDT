@@ -90,7 +90,7 @@ public class ListScene {
         findButton.setOnAction(e -> {
             replaceCurrentVBox(userInteractSpace, FindMenuController.createMenu(list, this::highlightRectangle));
         });
-        backButton.setOnAction(e -> sceneController.switchTo("Main"));
+        backButton.setOnAction(e -> sceneController.switchTo("Menu"));
 
         return userInteractSpace;
     }

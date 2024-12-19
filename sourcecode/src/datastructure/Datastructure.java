@@ -40,6 +40,7 @@ public abstract class Datastructure {
 		return elements;
 	}
 
+
 	public void createRandom(int newSize) {
 		if (newSize > capacity) {
 			while (capacity < newSize) {
@@ -53,5 +54,27 @@ public abstract class Datastructure {
 		size = newSize;
 	}
 
+
+	public void createRandom(int newSize) {
+		if (newSize > capacity) {
+			while (capacity < newSize) {
+				resize();
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < newSize; i++) {
+			elements[i] = random.nextInt(100);
+		}
+		size = newSize;
+	}
 	public abstract void display();
+
+	public int getCapacity(){
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
 }

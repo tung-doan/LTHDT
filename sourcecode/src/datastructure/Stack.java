@@ -67,6 +67,7 @@ public class Stack extends Datastructure {
 		return elements[top];
 	}
 
+
 	public void createRandom(int newSize) {
 		if (newSize > capacity) {
 			while (capacity < newSize) {
@@ -80,4 +81,5 @@ public class Stack extends Datastructure {
 		size = newSize;
 		top = size - 1;
 	}
+
 }

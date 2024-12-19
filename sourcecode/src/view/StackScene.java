@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import utility.AlertUtils;
 import utility.ButtonUtils;
 
 public class StackScene {
@@ -52,11 +53,10 @@ public class StackScene {
 		// ScrollPane to add scrolling capability
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(stackVisualization);
-		scrollPane.setFitToWidth(true); // Đảm bảo vừa với chiều rộng
-		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // Luôn hiển thị thanh cuộn
-		scrollPane.setPannable(true); // Cho phép kéo nội dung bằng chuột
+		scrollPane.setFitToWidth(true);
+		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+		scrollPane.setPannable(true);
 
-		// Thêm ScrollPane vào phần phải (thay vì VBox trực tiếp)
 		root.setRight(scrollPane);
 		updateVisualization();
 		return new Scene(root, 1000, 600);
@@ -95,16 +95,16 @@ public class StackScene {
 				stack.pop();
 				updateVisualization();
 			} catch (IllegalStateException ex) {
-				showAlert("Error", "Stack is empty. Cannot pop an element.");
+				AlertUtils.showAlert("Error", "Stack is empty. Cannot pop an element.", Alert.AlertType.ERROR);
 			}
 		});
 
 		topButton.setOnAction(e -> {
 			try {
 				int topValue = stack.peek();
-				showAlert("Top Element", "The top element is: " + topValue);
+				AlertUtils.showAlert("Top Element", "The top element is: " + topValue, Alert.AlertType.INFORMATION);
 			} catch (IllegalStateException ex) {
-				showAlert("Error", "Stack is empty. No top element.");
+				AlertUtils.showAlert("Error", "Stack is empty. No top element.", Alert.AlertType.ERROR);
 			}
 		});
 
@@ -125,7 +125,6 @@ public class StackScene {
 		stackVisualization.getChildren().clear();
 
 		int[] elements = stack.getElements();
-		stack.display();
 		int size = stack.getsize();
 
 		for (int i = 0; i < size; i++) {
@@ -143,14 +142,14 @@ public class StackScene {
 				positionText = "tail/" + i;
 			Text positionLabel = new Text(positionText);
 			positionLabel.setFill(Color.RED);
-			// Gộp node và label vào VBox
+
 			VBox node = new VBox(-5);
 			node.setPadding(new Insets(0));
 			node.setAlignment(Pos.CENTER);
-			// Tạo StackPane cho Circle và Text
+
 			StackPane stackPane = new StackPane(circle, text);
 			node.getChildren().addAll(stackPane, positionLabel);
-			// Thêm arrow nếu không phải node cuối cùng
+
 			stackVisualization.getChildren().add(node);
 			if (i < size - 1) {
 				Text arrowText = new Text("↓");
