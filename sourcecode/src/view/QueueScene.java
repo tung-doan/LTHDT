@@ -84,8 +84,32 @@ public class QueueScene {
         });
 
         enqueueButton.setOnAction(e -> {
-            replaceCurrentVBox(userInteractSpace, EnqueueMenuController.createEnqueueMenu(queue, this::updateVisualization));
-        });
+    VBox enqueueMenu = new VBox(10);
+    enqueueMenu.setPadding(new Insets(10));
+    enqueueMenu.setAlignment(Pos.CENTER);
+
+    Label titleLabel = new Label("Enqueue Element");
+    titleLabel.setStyle("-fx-font-weight: bold;");
+
+    TextField elementField = new TextField();
+    elementField.setPromptText("Enter element");
+
+    Button enqueueConfirmButton = ButtonUtils.createStyledButton("Enqueue");
+    enqueueConfirmButton.setOnAction(event -> {
+        try {
+            int element = Integer.parseInt(elementField.getText());
+            queue.enqueue(element);
+            updateVisualization();
+            showAlert("Enqueue Success", "Element enqueued successfully.");
+        } catch (NumberFormatException ex) {
+            showAlert("Error", "Please enter a valid integer.");
+        }
+    });
+
+    enqueueMenu.getChildren().addAll(titleLabel, elementField, enqueueConfirmButton);
+
+    replaceCurrentVBox(userInteractSpace, enqueueMenu);
+});
 
         dequeueButton.setOnAction(e -> {
             try {
