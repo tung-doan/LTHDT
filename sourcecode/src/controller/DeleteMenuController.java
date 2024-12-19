@@ -1,14 +1,15 @@
 package controller;
 
-import java.awt.Button;
-import java.awt.Label;
-import java.awt.TextField;
-
-import datastructure.List;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
-import utility.AlertUtils;
+import sourcecode.src.datastructure.List;
+import sourcecode.src.utility.AlertUtils;
 
 public class DeleteMenuController {
 
