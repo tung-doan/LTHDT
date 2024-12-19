@@ -18,10 +18,7 @@ public class List extends Datastructure {
 		return size == 0;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
+	
 	public boolean isFull() {
 		return size == capacity;
 	}

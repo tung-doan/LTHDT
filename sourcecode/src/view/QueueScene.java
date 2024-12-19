@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import utility.ButtonUtils;
+import utility.*;
 
 public class QueueScene {
 
@@ -116,20 +116,20 @@ public class QueueScene {
                 queue.dequeue();
                 updateVisualization();
             } catch (IllegalStateException ex) {
-                showAlert("Error", "Queue is empty. Cannot dequeue an element.");
+                AlertUtils.showAlert("Error", "Queue is empty. Cannot dequeue an element.", Alert.AlertType.ERROR);
             }
         });
 
         frontButton.setOnAction(e -> {
             try {
                 int frontValue = queue.peek();
-                showAlert("Front Element", "The front element is: " + frontValue);
+                AlertUtils.showAlert("Front Element", "The front element is: " + frontValue, Alert.AlertType.INFORMATION);
             } catch (IllegalStateException ex) {
-                showAlert("Error", "Queue is empty. No front element.");
+                AlertUtils.showAlert("Error", "Queue is empty. No front element.", Alert.AlertType.ERROR);
             }
         });
 
-        backButton.setOnAction(e -> sceneController.switchTo("Main"));
+        backButton.setOnAction(e -> sceneController.switchTo("Menu"));
 
         return userInteractSpace;
     }
@@ -184,13 +184,5 @@ public class QueueScene {
                 queueVisualization.getChildren().add(arrow);
             }
         }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

@@ -102,7 +102,7 @@ public class StackScene {
 			}
 		});
 
-		backButton.setOnAction(e -> sceneController.switchTo("Main"));
+		backButton.setOnAction(e -> sceneController.switchTo("Menu"));
 
 		return userInteractSpace;
 	}
