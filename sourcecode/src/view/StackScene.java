@@ -1,29 +1,46 @@
 package view;
 
+<<<<<<< HEAD
 import controller.CreateMenuController;
 import controller.PushMenuController;
 import controller.SceneController;
 import datastructure.Stack;
+=======
+import controller.SceneController;
+import datastructure.*;
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+<<<<<<< HEAD
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+=======
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+<<<<<<< HEAD
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import utility.ButtonUtils;
+=======
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import utility.*;
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 
 public class StackScene {
 
 	private Stack stack; // Instance of the Stack data structure
+<<<<<<< HEAD
 	private VBox currentVBox = null; // To track the current VBox displayed
 	private VBox stackVisualization; // Visualization of the Stack
 
@@ -32,6 +49,18 @@ public class StackScene {
 		root.setPadding(new Insets(10));
 		this.stack = new Stack(5);
 		stack.createRandom(5);
+=======
+	private VBox stackVisualization; // Visualization of the Stack
+
+	public StackScene() {
+		// Initialize the Stack
+		this.stack = new Stack(10); // Default size 10
+	}
+
+	public Scene createStackScene(SceneController sceneController) {
+		BorderPane root = new BorderPane();
+		root.setPadding(new Insets(10));
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 
 		// Title
 		Label title = new Label("Stack Operations");
@@ -43,11 +72,16 @@ public class StackScene {
 		HBox operationButtons = createOperationButtons(sceneController);
 		root.setLeft(operationButtons);
 
+<<<<<<< HEAD
 		// Stack Visualization with ScrollPane
+=======
+		// Stack Visualization
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 		stackVisualization = new VBox(10);
 		stackVisualization.setAlignment(Pos.BOTTOM_CENTER);
 		stackVisualization.setPadding(new Insets(5));
 		stackVisualization.setPrefWidth(300);
+<<<<<<< HEAD
 
 		// ScrollPane to add scrolling capability
 		ScrollPane scrollPane = new ScrollPane();
@@ -59,6 +93,11 @@ public class StackScene {
 		// Thêm ScrollPane vào phần phải (thay vì VBox trực tiếp)
 		root.setRight(scrollPane);
 		updateVisualization();
+=======
+		stackVisualization.setPrefHeight(400);
+		root.setCenter(stackVisualization);
+
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 		return new Scene(root, 1000, 600);
 	}
 
@@ -82,12 +121,25 @@ public class StackScene {
 		userInteractSpace.setAlignment(Pos.TOP_LEFT);
 		userInteractSpace.getChildren().add(buttonLayout);
 
+<<<<<<< HEAD
 		createButton.setOnAction(e -> {
 			replaceCurrentVBox(userInteractSpace, CreateMenuController.createMenu(stack, this::updateVisualization));
 		});
 
 		pushButton.setOnAction(e -> {
 			replaceCurrentVBox(userInteractSpace, PushMenuController.createPushMenu(stack, this::updateVisualization));
+=======
+		// Set up button actions
+		createButton.setOnAction(e -> {
+			stack.create(); // Reinitialize stack
+			updateVisualization();
+		});
+
+		pushButton.setOnAction(e -> {
+			int newValue = (int) (Math.random() * 100); // Generate random value
+			stack.push(newValue);
+			updateVisualization();
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 		});
 
 		popButton.setOnAction(e -> {
@@ -95,13 +147,18 @@ public class StackScene {
 				stack.pop();
 				updateVisualization();
 			} catch (IllegalStateException ex) {
+<<<<<<< HEAD
 				showAlert("Error", "Stack is empty. Cannot pop an element.");
+=======
+				AlertUtils.showAlert("Error", "Stack is empty. Cannot pop an element.", Alert.AlertType.ERROR);
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 			}
 		});
 
 		topButton.setOnAction(e -> {
 			try {
 				int topValue = stack.peek();
+<<<<<<< HEAD
 				showAlert("Top Element", "The top element is: " + topValue);
 			} catch (IllegalStateException ex) {
 				showAlert("Error", "Stack is empty. No top element.");
@@ -109,10 +166,20 @@ public class StackScene {
 		});
 
 		backButton.setOnAction(e -> sceneController.switchTo("Main"));
+=======
+				AlertUtils.showAlert("Top Element", "The top element is: " + topValue, Alert.AlertType.INFORMATION);
+			} catch (IllegalStateException ex) {
+				AlertUtils.showAlert("Error", "Stack is empty. No top element.", Alert.AlertType.ERROR);
+			}
+		});
+
+		backButton.setOnAction(e -> sceneController.switchTo("Menu"));
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 
 		return userInteractSpace;
 	}
 
+<<<<<<< HEAD
 	private void replaceCurrentVBox(HBox container, VBox newVBox) {
 		if (currentVBox != null) {
 			container.getChildren().remove(currentVBox);
@@ -172,4 +239,22 @@ public class StackScene {
 		alert.setContentText(message);
 		alert.showAndWait();
 	}
+=======
+	// Method to update the visualization of the Stack
+	private void updateVisualization() {
+		stackVisualization.getChildren().clear();
+
+		for (int i = stack.getsize() - 1; i >= 0; i--) {
+			int element = stack.getElements()[i];
+			Rectangle rectangle = new Rectangle(80, 40);
+			rectangle.setFill(Color.LIGHTGREEN);
+			rectangle.setStroke(Color.BLACK);
+
+			Text text = new Text(String.valueOf(element));
+			StackPane stackPane = new StackPane(rectangle, text);
+
+			stackVisualization.getChildren().add(stackPane);
+		}
+	}	
+>>>>>>> 2e15e541136f2910545ac10e9cdfe94a74ba17a4
 }

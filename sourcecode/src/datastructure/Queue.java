@@ -5,8 +5,15 @@ public class Queue extends Datastructure{
     	private int front;
     	private int bottom;
 
+		public int getSize() {
+			return front-bottom;
+		}
 
-    	public Queue(int capa) {
+    	public int getFront() {
+			return front;
+		}
+
+		public Queue(int capa) {
     		super(capa);
     		front = 0;
     		bottom = -1;
