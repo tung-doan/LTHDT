@@ -1,41 +1,38 @@
 package controller;
 
+import datastructure.Datastructure;
+import datastructure.List;
+import datastructure.Stack;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import sourcecode.src.datastructure.Datastructure;
-import sourcecode.src.datastructure.List;
-import sourcecode.src.datastructure.Queue;
-import sourcecode.src.utility.AlertUtils;
+import utility.AlertUtils;
 
 public class CreateMenuController {
 
 	public static VBox createMenu(Datastructure datastructure, Runnable updateVisualization) {
 		VBox createMenu = new VBox(10);
 
-		Label sizeLabel = new Label("Enter the size: ");
+		Label sizeLabel = new Label("Enter size of the list:");
 		TextField sizeInput = new TextField();
 		Button randomButton = new Button("Random");
 		Button userDefinedButton = new Button("User Defined");
 
 		createMenu.getChildren().addAll(sizeLabel, sizeInput, randomButton, userDefinedButton);
 		createMenu.setAlignment(Pos.TOP_LEFT);
-		createMenu.setPrefWidth(150);
+		createMenu.setPrefWidth(200);
 		createMenu.setPrefHeight(200);
 
 		randomButton.setOnAction(e -> {
 			try {
 				int size = Integer.parseInt(sizeInput.getText());
-				if (datastructure instanceof List) {
-					((List) datastructure).createRandom(size);
-				} else if (datastructure instanceof Queue) {
-					for (int i = 0; i < size; i++) {
-						((Queue) datastructure).enqueue((int) (Math.random() * 100));
-					}
-				}
+				datastructure.createRandom(size);
 				updateVisualization.run();
 			} catch (NumberFormatException ex) {
-				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer for the size.",
+				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer for the size of the list.",
 						Alert.AlertType.ERROR);
 			}
 		});
@@ -43,34 +40,30 @@ public class CreateMenuController {
 		final boolean[] userDefinedAdded = { false };
 		userDefinedButton.setOnAction(e -> {
 			if (!userDefinedAdded[0]) {
-				Label userDefinedLabel = new Label("Enter the elements (comma-separated):");
+				Label userDefinedLabel = new Label("Enter the list (comma-separated):");
 				TextField userDefinedInput = new TextField();
-				Button confirmButton = new Button("Create");
+				Button confirmButton = new Button("Confirm");
 
 				createMenu.getChildren().addAll(userDefinedLabel, userDefinedInput, confirmButton);
+
 				userDefinedAdded[0] = true;
 
 				confirmButton.setOnAction(event -> {
 					String input = userDefinedInput.getText();
 					String[] elements = input.split(",");
-
+					if (datastructure instanceof Stack)
+						((Stack) datastructure).create();
 					try {
-						datastructure.setCapacity(elements.length);
-						datastructure.create(); // Reset the structure
-
 						for (String element : elements) {
-							int value = Integer.parseInt(element.trim());
-							if (datastructure instanceof List) {
-								((List) datastructure).insert(value);
-							} else if (datastructure instanceof Queue) {
-								((Queue) datastructure).enqueue(value);
+							if (datastructure instanceof List)
+								((List) datastructure).insert(Integer.parseInt(element.trim()));
+							else if (datastructure instanceof Stack) {
+								((Stack) datastructure).push(Integer.parseInt(element.trim()));
 							}
 						}
-
 						updateVisualization.run();
-						AlertUtils.showAlert("Success", "Structure created successfully.", Alert.AlertType.INFORMATION);
 					} catch (NumberFormatException ex) {
-						AlertUtils.showAlert("Invalid Input", "Please enter valid comma-separated integers.",
+						AlertUtils.showAlert("Invalid Input", "Please enter a valid comma-separated list of integers.",
 								Alert.AlertType.ERROR);
 					}
 				});

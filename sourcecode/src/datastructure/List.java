@@ -18,8 +18,16 @@ public class List extends Datastructure {
 		return size == 0;
 	}
 
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
 	public boolean isFull() {
 		return size == capacity;
+	}
+
+	public int[] getElements() {
+		return elements;
 	}
 
 	// insert at index
@@ -56,6 +64,19 @@ public class List extends Datastructure {
 	public void create() {
 		elements = new int[capacity];
 		size = 0;
+	}
+
+	public void createRandom(int newSize) {
+		if (newSize > capacity) {
+			while (capacity < newSize) {
+				resize();
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < newSize; i++) {
+			elements[i] = random.nextInt(100);
+		}
+		size = newSize;
 	}
 
 	// insert at the end
@@ -108,18 +129,5 @@ public class List extends Datastructure {
 			}
 		}
 		return -1;
-	}
-
-	public void createRandom(int newSize) {
-		if (newSize > capacity) {
-			while (capacity < newSize) {
-				resize();
-			}
-		}
-		Random random = new Random();
-		for (int i = 0; i < newSize; i++) {
-			elements[i] = random.nextInt(100);
-		}
-		size = newSize;
 	}
 }

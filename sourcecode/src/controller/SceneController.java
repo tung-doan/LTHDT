@@ -1,10 +1,9 @@
 package controller;
 
-import java.util.HashMap;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import java.util.HashMap;
 // CÁI NÀY ĐỂ CHUYỂN CẢNH 
 public class SceneController {
 	private final Stage primaryStage;

@@ -1,15 +1,14 @@
 package app;
 
+import controller.SceneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import sourcecode.src.controller.SceneController;
-import sourcecode.src.utility.AlertUtils;
-import sourcecode.src.view.ListScene;
-import sourcecode.src.view.MenuScene;
-import sourcecode.src.view.StackScene;
-import view.*;
+import utility.AlertUtils;
+import view.ListScene;
+import view.MenuScene;
+import view.QueueScene;
+import view.StackScene;
 
-// ĐÂY LÀ CHO DE CHAY CHUONG TRINH
 public class App extends Application {
 
 	private SceneController sceneController;

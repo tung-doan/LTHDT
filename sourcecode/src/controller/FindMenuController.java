@@ -2,14 +2,14 @@ package controller;
 
 import java.util.function.Consumer;
 
+import datastructure.List;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import sourcecode.src.datastructure.List;
-import sourcecode.src.utility.AlertUtils;
+import utility.AlertUtils;
 
 public class FindMenuController {
 

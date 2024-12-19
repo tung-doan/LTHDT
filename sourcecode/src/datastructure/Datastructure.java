@@ -53,13 +53,4 @@ public abstract class Datastructure {
 	}
 
 	public abstract void display();
-
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
 }
