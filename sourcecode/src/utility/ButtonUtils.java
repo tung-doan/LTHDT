@@ -8,6 +8,7 @@ public class ButtonUtils {
     public static Button createStyledButton(String text) {
         Button button = new Button(text);
         button.setPrefWidth(100);
+        button.setMaxWidth(150);
 
         // Set the default style for the button
         button.setStyle("-fx-background-color: linear-gradient(to bottom, #4CAF50, #2E7D32); " +
@@ -35,13 +36,5 @@ public class ButtonUtils {
         });
 
         return button;
-    }
-
-    public static void highlightButton(Button button) {
-        button.setStyle("-fx-background-color: linear-gradient(to bottom, rgb(51, 34, 201), rgb(16, 21, 90)); " +
-                        "-fx-text-fill: white; " +
-                        "-fx-font-size: 14px; " +
-                        "-fx-border-radius: 5px; " +
-                        "-fx-background-radius: 5px;");
     }
 }

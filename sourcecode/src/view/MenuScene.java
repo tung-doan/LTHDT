@@ -4,30 +4,43 @@ import controller.SceneController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import utility.ButtonUtils;
+import javafx.stage.Stage;
+import utility.*;
 
 public class MenuScene {
 
-    public Scene createMenuScene(SceneController sceneController) {
+    public Scene createMenuScene(SceneController sceneController, Stage primaryStage) {
         // Tạo layout chính
         VBox menuLayout = new VBox(20);
         menuLayout.setAlignment(Pos.CENTER);
 
+        Label title = new Label("Data Structure Operations");
+        title.setStyle("-fx-font-size: 25px; -fx-font-weight: bold;");
         // Tạo các nút chức năng
         Button listButton = ButtonUtils.createStyledButton("List Operations");
         Button stackButton = ButtonUtils.createStyledButton("Stack Operations");
         Button queueButton = ButtonUtils.createStyledButton("Queue Operations");
-        Button backButton = ButtonUtils.createStyledButton("Back to Main Menu");
+        Button exitButton = ButtonUtils.createStyledButton("Exit");
 
         // Set action cho các nút
         listButton.setOnAction(e -> sceneController.switchTo("List"));
-        stackButton.setOnAction(e -> System.out.println("Stack"));
-        queueButton.setOnAction(e -> System.out.println("Queue"));
-        backButton.setOnAction(e -> sceneController.switchTo("Main"));
+        stackButton.setOnAction(e -> sceneController.switchTo("Stack"));
+        queueButton.setOnAction(e -> sceneController.switchTo("Queue"));
+        exitButton.setOnAction(e -> {
+            boolean confirmed = AlertUtils.showConfirmationDialog(
+                "Exit Confirmation", 
+                "Are you sure you want to exit?\n"
+            );
+
+            if (confirmed) {
+                primaryStage.close(); // đóng
+            }
+        });
 
         // Thêm các nút vào layout
-        menuLayout.getChildren().addAll(listButton, stackButton, queueButton, backButton);
+        menuLayout.getChildren().addAll(title, listButton, stackButton, queueButton, exitButton);
 
         // Trả về Scene
         return new Scene(menuLayout, 800, 600);
