@@ -18,9 +18,11 @@ public class MainScene {
         // Create the button and set its action
         Button goToListButton = ButtonUtils.createStyledButton("Go to List Operations");
         goToListButton.setOnAction(e -> sceneController.switchTo("List"));
+        Button goToStackButton = ButtonUtils.createStyledButton("Go to Stack Operations");
+		goToStackButton.setOnAction(e -> sceneController.switchTo("Stack"));
 
         // Add the button to the layout
-        rootLayout.getChildren().add(goToListButton);
+        rootLayout.getChildren().addAll(goToListButton,goToStackButton);
 
         // Create and return the scene
         return new Scene(rootLayout, 800, 600);
