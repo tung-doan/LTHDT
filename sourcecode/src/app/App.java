@@ -22,6 +22,7 @@ public class App extends Application {
 
 		// Set up scene switching logic
 		sceneController.addScene("Main", mainScene.createMainScene(sceneController));
+		sceneController.addScene("Menu", menuScene.createMenuScene(sceneController));
 		sceneController.addScene("List", listScene.createListScene(sceneController));
 		sceneController.addScene("Stack", stackScene.createStackScene(sceneController));
 

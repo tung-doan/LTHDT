@@ -56,6 +56,10 @@ public class Stack extends Datastructure {
 		return size;
 	}
 
+	public int getsize() {
+		return size;
+	}
+
 	public int peek() {
 		if (top == -1) {
 			throw new IllegalStateException("Stack is empty");

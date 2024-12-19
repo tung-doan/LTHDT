@@ -1,9 +1,10 @@
 package view;
 
+import java.awt.Button;
+
 import controller.SceneController;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import utility.ButtonUtils;
 

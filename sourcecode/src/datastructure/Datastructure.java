@@ -3,6 +3,7 @@ package datastructure;
 import java.util.Random;
 
 public abstract class Datastructure {
+
 	protected int size;
 	protected int[] elements;
 	int capacity;
