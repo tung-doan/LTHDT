@@ -56,8 +56,4 @@ public class Stack extends Datastructure {
 		}
 		return elements[top];
 	}
-
-	public static void main(String args[]) {
-		System.out.println("1");
-	}
 }

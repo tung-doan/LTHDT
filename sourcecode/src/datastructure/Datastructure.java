@@ -1,6 +1,6 @@
 package datastructure;
 
-
+import java.util.Random;
 abstract class Datastructure {
 	protected int size;
 	protected int[] elements;
@@ -34,7 +34,21 @@ abstract class Datastructure {
 		capacity = newcapacity;
 	}
 
-	
+	public int[] getElements() {
+		return elements;
+	}
 
+	public void createRandom(int newSize) {
+		if (newSize > capacity) {
+			while (capacity < newSize) {
+				resize();
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < newSize; i++) {
+			elements[i] = random.nextInt(100);
+		}
+		size = newSize;
+	}
 	public abstract void display();
 }
