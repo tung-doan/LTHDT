@@ -4,6 +4,7 @@ import controller.SceneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utility.AlertUtils;
+import view.HelpScene;
 import view.ListScene;
 import view.MenuScene;
 import view.QueueScene;
@@ -29,6 +30,7 @@ public class App extends Application {
 		sceneController.addScene("List", listScene.createListScene(sceneController));
 		sceneController.addScene("Stack", stackScene.createStackScene(sceneController));
 		sceneController.addScene("Queue", queueScene.createQueueScene(sceneController));
+		sceneController.addScene("Help", HelpScene.createHelpScene(sceneController));
 
 		// Close promt
 		primaryStage.setOnCloseRequest(event -> {
