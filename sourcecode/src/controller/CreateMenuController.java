@@ -58,7 +58,7 @@ public class CreateMenuController {
 							if (datastructure instanceof List)
 								((List) datastructure).insert(Integer.parseInt(element.trim()));
 							else if (datastructure instanceof Stack) {
-								((Stack) datastructure).push(Integer.parseInt(element.trim()));
+								((Stack) datastructure).insert(Integer.parseInt(element.trim()));
 							}
 						}
 						updateVisualization.run();

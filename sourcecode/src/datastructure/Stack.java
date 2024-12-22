@@ -11,12 +11,11 @@ public class Stack extends Datastructure {
 	}
 
 	public void create() {
-		elements = new int[capacity];
 		size = 0;
 		top = -1;
 	}
 
-	protected void insert(int element) {
+	public void insert(int element) {
 		if (size == capacity) {
 			resize();
 		}
@@ -24,11 +23,11 @@ public class Stack extends Datastructure {
 		size++;
 	}
 
-	protected void delete(int element) {
+	public void delete(int element) {
 		throw new UnsupportedOperationException("Stack does not support deleting specific elements.");
 	}
 
-	protected void delete() {
+	public void delete() {
 		if (top == -1) {
 			throw new IllegalStateException("Stack is empty");
 		}
@@ -42,14 +41,6 @@ public class Stack extends Datastructure {
 				System.out.println(elements[i]);
 			}
 		}
-	}
-
-	public void push(int element) {
-		insert(element);
-	}
-
-	public void pop() {
-		delete();
 	}
 
 	public int getsize() {

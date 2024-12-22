@@ -1,10 +1,13 @@
 package view;
 
+import controller.CreateMenuController;
+import controller.PushMenuController;
+import controller.SceneController;
+import datastructure.Stack;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -15,12 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import sourcecode.src.controller.CreateMenuController;
-import sourcecode.src.controller.PushMenuController;
-import sourcecode.src.controller.SceneController;
-import sourcecode.src.datastructure.Stack;
-import sourcecode.src.utility.AlertUtils;
-import sourcecode.src.utility.ButtonUtils;
+import utility.AlertUtils;
+import utility.ButtonUtils;
 
 public class StackScene {
 
@@ -92,7 +91,7 @@ public class StackScene {
 
 		popButton.setOnAction(e -> {
 			try {
-				stack.pop();
+				stack.delete();
 				updateVisualization();
 			} catch (IllegalStateException ex) {
 				AlertUtils.showAlert("Error", "Stack is empty. Cannot pop an element.", Alert.AlertType.ERROR);
@@ -161,14 +160,5 @@ public class StackScene {
 				stackVisualization.getChildren().add(arrow);
 			}
 		}
-	}
-
-	// Method to show an alert dialog
-	private void showAlert(String title, String message) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(title);
-		alert.setHeaderText(null);
-		alert.setContentText(message);
-		alert.showAndWait();
 	}
 }
