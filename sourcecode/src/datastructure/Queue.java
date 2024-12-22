@@ -1,7 +1,5 @@
 package datastructure;
 
-import datastructure.Datastructure;
-
 public class Queue extends Datastructure {
 
 	private int front;
@@ -13,6 +11,10 @@ public class Queue extends Datastructure {
 
 	public int getFront() {
 		return front;
+	}
+
+	public int getCapacity(){
+		return capacity;
 	}
 
 	public Queue(int capa) {

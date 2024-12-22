@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import utility.AlertUtils;
 
 public class InsertMenuController {
+	
 	public static VBox createMenu(List list, Runnable updateVisualization, Consumer<Integer> highlightElement) {
 		VBox insertMenu = new VBox(10);
 

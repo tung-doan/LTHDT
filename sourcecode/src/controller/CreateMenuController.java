@@ -13,10 +13,11 @@ import utility.AlertUtils;
 
 public class CreateMenuController {
 
+	
 	public static VBox createMenu(Datastructure datastructure, Runnable updateVisualization) {
 		VBox createMenu = new VBox(10);
 
-		Label sizeLabel = new Label("Enter size of the list:");
+		Label sizeLabel = new Label("Enter the size:");
 		TextField sizeInput = new TextField();
 		Button randomButton = new Button("Random");
 		Button userDefinedButton = new Button("User Defined");
@@ -32,7 +33,7 @@ public class CreateMenuController {
 				datastructure.createRandom(size);
 				updateVisualization.run();
 			} catch (NumberFormatException ex) {
-				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer for the size of the list.",
+				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer.",
 						Alert.AlertType.ERROR);
 			}
 		});
@@ -40,8 +41,9 @@ public class CreateMenuController {
 		final boolean[] userDefinedAdded = { false };
 		userDefinedButton.setOnAction(e -> {
 			if (!userDefinedAdded[0]) {
-				Label userDefinedLabel = new Label("Enter the list (comma-separated):");
+				Label userDefinedLabel = new Label("Enter each elements (comma-separated):");
 				TextField userDefinedInput = new TextField();
+				userDefinedInput.setPromptText("e.g:3, 42, 56, 10");
 				Button confirmButton = new Button("Confirm");
 
 				createMenu.getChildren().addAll(userDefinedLabel, userDefinedInput, confirmButton);

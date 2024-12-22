@@ -107,12 +107,15 @@ public class List extends Datastructure {
 	}
 
 	// sort
-	public void sort() {
-		if (size <= 1)
-			return;
+	public void sort(boolean ascending) {
+		if (size <= 1) {
+			return; 
+		}
 		for (int i = 0; i < size - 1; i++) {
 			for (int j = 0; j < size - i - 1; j++) {
-				if (elements[j] > elements[j + 1]) {
+				
+				if ((ascending && elements[j] > elements[j + 1]) || 
+					(!ascending && elements[j] < elements[j + 1])) {
 					int temp = elements[j];
 					elements[j] = elements[j + 1];
 					elements[j + 1] = temp;

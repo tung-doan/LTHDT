@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -45,13 +46,20 @@ public class ListScene {
         listVisualization = new HBox(10);
         listVisualization.setAlignment(Pos.TOP_LEFT);
         listVisualization.setPadding(new Insets(5));
-        listVisualization.setPrefWidth(800);  
-        listVisualization.setPrefHeight(400);
-        root.setRight(listVisualization);
+        listVisualization.setPrefWidth(600);  
+        listVisualization.setPrefHeight(100);
 
-        return new Scene(root, 1000, 1000);
+        ScrollPane scrollPane = new ScrollPane(listVisualization);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); 
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); 
+        scrollPane.setFitToHeight(true);
+        scrollPane.setPannable(true);
+
+        root.setRight(scrollPane);
+
+        return new Scene(root, 1000, 600);
     }
-
+ 
     private HBox createOperationButtons(SceneController sceneController) {
         VBox buttonLayout = new VBox(10);
         buttonLayout.setPadding(new Insets(10));
@@ -84,8 +92,7 @@ public class ListScene {
             replaceCurrentVBox(userInteractSpace, DeleteMenuController.createMenu(list, this::updateVisualization));        
         });
         sortButton.setOnAction(e -> {
-            list.sort();
-            updateVisualization();
+            replaceCurrentVBox(userInteractSpace, SortMenuController.createMenu(list, this::updateVisualization));
         });
         findButton.setOnAction(e -> {
             replaceCurrentVBox(userInteractSpace, FindMenuController.createMenu(list, this::highlightRectangle));
