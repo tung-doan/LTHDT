@@ -30,7 +30,7 @@ public class PushMenuController {
 				for (String element : elements) {
 
 					int value = Integer.parseInt(element.trim());
-					stack.push(value);
+					stack.insert(value);
 				}
 
 				updateVisualization.run();
