@@ -13,6 +13,7 @@ import utility.AlertUtils;
 
 public class FindMenuController {
 
+	
 	public static VBox createMenu(List list, Consumer<Integer> highlightElement) {
 		VBox findMenu = new VBox(10);
 

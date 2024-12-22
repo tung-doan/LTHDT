@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -58,7 +60,7 @@ public class QueueScene {
         updateVisualization();
         return new Scene(root, 1000, 600);
     }
-
+    
     private HBox createOperationButtons(SceneController sceneController) {
         VBox buttonLayout = new VBox(10);
         buttonLayout.setPadding(new Insets(10));
@@ -100,9 +102,9 @@ public class QueueScene {
             int element = Integer.parseInt(elementField.getText());
             queue.enqueue(element);
             updateVisualization();
-            showAlert("Enqueue Success", "Element enqueued successfully.");
+            AlertUtils.showAlert("Enqueue Success", "Element enqueued successfully.",AlertType.INFORMATION);
         } catch (NumberFormatException ex) {
-            showAlert("Error", "Please enter a valid integer.");
+            AlertUtils.showAlert("Error", "Please enter a valid integer.",AlertType.ERROR);
         }
     });
 

@@ -23,7 +23,7 @@ public class MenuScene {
 		Button listButton = ButtonUtils.createStyledButton("List Operations");
 		Button stackButton = ButtonUtils.createStyledButton("Stack Operations");
 		Button queueButton = ButtonUtils.createStyledButton("Queue Operations");
-		Button helpButton = ButtonUtils.createStyledButton("help");
+		Button helpButton = ButtonUtils.createStyledButton("Help");
 		Button exitButton = ButtonUtils.createStyledButton("Exit");
 
 		// Set action cho các nút
@@ -44,6 +44,6 @@ public class MenuScene {
 		menuLayout.getChildren().addAll(title, listButton, stackButton, queueButton, helpButton, exitButton);
 
 		// Trả về Scene
-		return new Scene(menuLayout, 800, 600);
+		return new Scene(menuLayout, 1000, 600);
 	}
 }
