@@ -1,12 +1,14 @@
 package datastructure;
 
+import java.util.Random;
+
 public class Queue extends Datastructure {
 
 	private int front;
 	private int bottom;
 
 	public int getSize() {
-		return front - bottom;
+		return size;
 	}
 
 	public int getFront() {
@@ -26,14 +28,27 @@ public class Queue extends Datastructure {
 
 	@Override
 	public void create() {
-		elements = new int[capacity];
-		size = 0;
 		front = 0;
 		bottom = -1;
 	}
 
+	public void createRandom(int newSize) {
+		if (newSize > capacity) {
+			while (capacity < newSize) {
+				resize();
+			}
+		}
+		Random random = new Random();
+		for (int i = 0; i < newSize; i++) {
+			elements[i] = random.nextInt(100);
+		}
+		size = newSize;
+		front = 0;
+		bottom = size - 1;
+	}
+	
 	@Override
-	protected void insert(int element) {
+	public void insert(int element) {
 		if (size == capacity) {
 			resize();
 		}
@@ -43,7 +58,7 @@ public class Queue extends Datastructure {
 	}
 
 	@Override
-	protected void delete(int element) {
+	public void delete(int element) {
 		if (size == 0) {
 			throw new IllegalStateException("Queue is empty");
 		}
