@@ -30,7 +30,7 @@ public class QueueScene {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(10));
         this.queue = new Queue(5);
-        queue.createRandom(5);
+        
 
         // Title
         Label title = new Label("Queue Operations");
@@ -88,10 +88,11 @@ public class QueueScene {
         enqueueButton.setOnAction(e -> {
     VBox enqueueMenu = new VBox(10);
     enqueueMenu.setPadding(new Insets(10));
-    enqueueMenu.setAlignment(Pos.CENTER);
+    enqueueMenu.setAlignment(Pos.TOP_LEFT);
+    enqueueMenu.setPrefWidth(300);
+    enqueueMenu.setPrefHeight(300);
 
     Label titleLabel = new Label("Enqueue Element");
-    titleLabel.setStyle("-fx-font-weight: bold;");
 
     TextField elementField = new TextField();
     elementField.setPromptText("Enter element");
@@ -99,8 +100,12 @@ public class QueueScene {
     Button enqueueConfirmButton = ButtonUtils.createStyledButton("Enqueue");
     enqueueConfirmButton.setOnAction(event -> {
         try {
-            int element = Integer.parseInt(elementField.getText());
-            queue.enqueue(element);
+        	String input = elementField.getText().trim();
+			String[] elements = input.split(",");
+			for (String element : elements) {
+
+				int value = Integer.parseInt(element.trim());
+				queue.insert(value);}
             updateVisualization();
             AlertUtils.showAlert("Enqueue Success", "Element enqueued successfully.",AlertType.INFORMATION);
         } catch (NumberFormatException ex) {
@@ -148,13 +153,12 @@ public class QueueScene {
         queueVisualization.getChildren().clear();
 
         int[] elements = queue.getElements();
-        queue.display();
         int size = queue.getSize();
 
         for (int i = 0; i < size; i++) {
             int element = elements[(queue.getFront() + i) % queue.getCapacity()];
 
-            Circle circle = new Circle(25, Color.LIGHTBLUE);
+            Circle circle = new Circle(25, Color.PINK);
             circle.setStroke(Color.BLACK);
 
             Text text = new Text(String.valueOf(element));
@@ -163,11 +167,11 @@ public class QueueScene {
             if (i == 0)
                 positionText = "front/" + i;
             else if (i == size - 1)
-                positionText = "rear/" + i;
+                positionText = "bottom/" + i;
             Text positionLabel = new Text(positionText);
-            positionLabel.setFill(Color.RED);
+            positionLabel.setFill(Color.ORANGE);
 
-            VBox node = new VBox(-5);
+            VBox node = new VBox(0);
             node.setPadding(new Insets(0));
             node.setAlignment(Pos.CENTER);
 
@@ -177,10 +181,10 @@ public class QueueScene {
             queueVisualization.getChildren().add(node);
 
             if (i < size - 1) {
-                Text arrowText = new Text("→");
-                arrowText.setStyle("-fx-font-size: 30px;");
+                Text arrowText = new Text("↑");
+                arrowText.setStyle("-fx-font-size: 40px;");
                 VBox arrow = new VBox(-10);
-                arrow.setPadding(new Insets(0));
+                arrow.setPadding(new Insets(-15));
                 arrow.setAlignment(Pos.CENTER);
                 arrow.getChildren().add(arrowText);
                 queueVisualization.getChildren().add(arrow);
