@@ -9,9 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -21,47 +18,20 @@ import javafx.scene.text.Text;
 import utility.AlertUtils;
 import utility.ButtonUtils;
 
-public class StackScene {
+public class StackScene extends BaseScene {
 
 	private Stack stack; // Instance of the Stack data structure
-	private VBox currentVBox = null; // To track the current VBox displayed
-	private VBox stackVisualization; // Visualization of the Stack
 
 	public Scene createStackScene(SceneController sceneController) {
-		BorderPane root = new BorderPane();
-		root.setPadding(new Insets(10));
 		this.stack = new Stack(5);
 		stack.createRandom(5);
-
-		// Title
-		Label title = new Label("Stack Operations");
-		title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-		BorderPane.setAlignment(title, Pos.CENTER);
-		root.setTop(title);
-
-		// Operation Buttons
-		HBox operationButtons = createOperationButtons(sceneController);
-		root.setLeft(operationButtons);
-
-		// Stack Visualization with ScrollPane
-		stackVisualization = new VBox(10);
-		stackVisualization.setAlignment(Pos.BOTTOM_CENTER);
-		stackVisualization.setPadding(new Insets(5));
-		stackVisualization.setPrefWidth(300);
-
-		// ScrollPane to add scrolling capability
-		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setContent(stackVisualization);
-		scrollPane.setFitToWidth(true);
-		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-		scrollPane.setPannable(true);
-
-		root.setRight(scrollPane);
+		Scene scene = createBaseScene(sceneController, "Stack Operations");
 		updateVisualization();
-		return new Scene(root, 1000, 600);
+		return scene;
 	}
 
-	private HBox createOperationButtons(SceneController sceneController) {
+	@Override
+	protected HBox createOperationButtons(SceneController sceneController) {
 		VBox buttonLayout = new VBox(10);
 		buttonLayout.setPadding(new Insets(10));
 		buttonLayout.setPrefWidth(100);
@@ -91,7 +61,7 @@ public class StackScene {
 
 		popButton.setOnAction(e -> {
 			try {
-				stack.delete();
+				stack.pop();
 				updateVisualization();
 			} catch (IllegalStateException ex) {
 				AlertUtils.showAlert("Error", "Stack is empty. Cannot pop an element.", Alert.AlertType.ERROR);
@@ -112,19 +82,11 @@ public class StackScene {
 		return userInteractSpace;
 	}
 
-	private void replaceCurrentVBox(HBox container, VBox newVBox) {
-		if (currentVBox != null) {
-			container.getChildren().remove(currentVBox);
-		}
-		container.getChildren().add(newVBox);
-		currentVBox = newVBox;
-	}
-
 	private void updateVisualization() {
-		stackVisualization.getChildren().clear();
+		visualizationBox.getChildren().clear();
 
 		int[] elements = stack.getElements();
-		int size = stack.getsize();
+		int size = stack.getSize();
 
 		for (int i = 0; i < size; i++) {
 			int element = elements[size - 1 - i];
@@ -149,7 +111,8 @@ public class StackScene {
 			StackPane stackPane = new StackPane(circle, text);
 			node.getChildren().addAll(stackPane, positionLabel);
 
-			stackVisualization.getChildren().add(node);
+			visualizationBox.getChildren().add(node);
+
 			if (i < size - 1) {
 				Text arrowText = new Text("↓");
 				arrowText.setStyle("-fx-font-size: 30px;");
@@ -157,7 +120,7 @@ public class StackScene {
 				arrow.setPadding(new Insets(0));
 				arrow.setAlignment(Pos.CENTER);
 				arrow.getChildren().add(arrowText);
-				stackVisualization.getChildren().add(arrow);
+				visualizationBox.getChildren().add(arrow);
 			}
 		}
 	}
