@@ -52,9 +52,7 @@ public class CreateMenuController {
 				confirmButton.setOnAction(event -> {
 					String input = userDefinedInput.getText();
 					String[] elements = input.split(",");
-					if (datastructure instanceof Stack)
-						((Stack) datastructure).create();
-
+					datastructure.create();
 					try {
 						for (String element : elements) {
 							datastructure.insert(Integer.parseInt(element.trim()));
