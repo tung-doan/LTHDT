@@ -1,9 +1,6 @@
 package controller;
 
 import datastructure.Datastructure;
-import datastructure.List;
-import datastructure.Queue;
-import datastructure.Stack;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -34,8 +31,9 @@ public class CreateMenuController {
 				datastructure.createRandom(size);
 				updateVisualization.run();
 			} catch (NumberFormatException ex) {
-				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer.",
-						Alert.AlertType.ERROR);
+
+				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer.", Alert.AlertType.ERROR);
+
 			}
 		});
 
@@ -59,14 +57,7 @@ public class CreateMenuController {
 
 					try {
 						for (String element : elements) {
-							if (datastructure instanceof List)
-								((List) datastructure).insert(Integer.parseInt(element.trim()));
-							else if (datastructure instanceof Stack) {
-								((Stack) datastructure).insert(Integer.parseInt(element.trim()));
-							}
-							else if (datastructure instanceof Queue) {
-								((Queue) datastructure).insert(Integer.parseInt(element.trim()));
-							}
+							datastructure.insert(Integer.parseInt(element.trim()));
 						}
 						updateVisualization.run();
 					} catch (NumberFormatException ex) {

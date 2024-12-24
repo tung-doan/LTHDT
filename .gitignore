@@ -1,11 +1,9 @@
-<<<<<<< Updated upstream
+
 sourcecode/.classpath
 sourcecode/.project
 sourcecode/.settings/
-sourcecode/bin
+sourcecode/bin/
 sourcecode/source/module-info.java
-=======
-
 Demonstation of Operations on DataStructure/README.md
 Demonstation of Operations on DataStructure/.vscode/settings.json
 Demonstation of Operations on DataStructure/bin/MyList.class
@@ -16,6 +14,5 @@ sourcecode/src/DataStructure.java
 /sourcecode/src/datastructure
 /sourcecode/src/datastructure
 sourcecode/src/datastructure/List.java
->>>>>>> Stashed changes
 sourcecode/src/.vscode/launch.json
 /sourcecode/src/.vscode
