@@ -1,7 +1,6 @@
 package controller;
 
 import datastructure.Datastructure;
-import datastructure.Stack;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,6 +11,7 @@ import utility.AlertUtils;
 
 public class CreateMenuController {
 
+	
 	public static VBox createMenu(Datastructure datastructure, Runnable updateVisualization) {
 		VBox createMenu = new VBox(10);
 
@@ -31,7 +31,9 @@ public class CreateMenuController {
 				datastructure.createRandom(size);
 				updateVisualization.run();
 			} catch (NumberFormatException ex) {
+
 				AlertUtils.showAlert("Invalid Input", "Please enter a valid integer.", Alert.AlertType.ERROR);
+
 			}
 		});
 

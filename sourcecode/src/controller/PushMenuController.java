@@ -35,11 +35,9 @@ public class PushMenuController {
 
 				updateVisualization.run();
 			} catch (NumberFormatException ex) {
-				AlertUtils.showAlert("Invalid Input", "Please enter a valid comma-separated list of integers.",
-						Alert.AlertType.ERROR);
+				AlertUtils.showAlert("Invalid Input", "Please enter a valid comma-separated list of integers.", Alert.AlertType.ERROR);
 			} catch (IllegalStateException ex) {
-				AlertUtils.showAlert("Stack Overflow", "The stack is full. Cannot push more values.",
-						Alert.AlertType.ERROR);
+				AlertUtils.showAlert("Stack Overflow", "The stack is full. Cannot push more values.", Alert.AlertType.ERROR);
 			}
 		});
 

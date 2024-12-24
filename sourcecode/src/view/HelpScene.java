@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import utility.ButtonUtils;
 
 public class HelpScene {
-
+	
 	public static Scene createHelpScene(SceneController sceneController) {
 		// Tạo VBox cho nội dung chính
 		VBox helpLayout = new VBox(20);
@@ -49,6 +49,6 @@ public class HelpScene {
 		helpLayout.getChildren().addAll(titleLabel, scrollPane, backButton);
 
 		// Trả về giao diện
-		return new Scene(helpLayout, 800, 600);
+		return new Scene(helpLayout, 1000, 600);
 	}
 }
