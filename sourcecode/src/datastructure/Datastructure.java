@@ -52,5 +52,9 @@ public abstract class Datastructure {
 		size = newSize;
 	}
 
+	public int getSize() {
+		return size;
+	}
+
 	public abstract void display();
 }

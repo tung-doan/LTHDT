@@ -9,11 +9,6 @@ public class List extends Datastructure {
 		super(capacity);
 	}
 
-	// utility function
-	public int getSize() {
-		return size;
-	}
-
 	public boolean isEmpty() {
 		return size == 0;
 	}

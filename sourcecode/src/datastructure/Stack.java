@@ -43,8 +43,12 @@ public class Stack extends Datastructure {
 		}
 	}
 
-	public int getsize() {
-		return size;
+	public void pop() {
+		delete();
+	}
+
+	public void push(int element) {
+		insert(element);
 	}
 
 	public int peek() {
