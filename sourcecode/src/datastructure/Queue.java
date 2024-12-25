@@ -26,6 +26,7 @@ public class Queue extends Datastructure {
 	public void create() {
 		front = 0;
 		bottom = -1;
+		size = 0;
 	}
 
 	public void createRandom(int newSize) {
