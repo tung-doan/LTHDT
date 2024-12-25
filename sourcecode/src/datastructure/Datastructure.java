@@ -15,7 +15,7 @@ public abstract class Datastructure {
 
 	public abstract void create();
 
-	protected abstract void insert(int element);
+	public abstract void insert(int element);
 
 	public void sort() {
 		System.out.println("Sort method not implemented");
