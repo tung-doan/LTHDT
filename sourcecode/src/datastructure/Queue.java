@@ -7,10 +7,6 @@ public class Queue extends Datastructure {
 	private int front;
 	private int bottom;
 
-	public int getSize() {
-		return size;
-	}
-
 	public int getFront() {
 		return front;
 	}
