@@ -7,15 +7,11 @@ public class Queue extends Datastructure {
 	private int front;
 	private int bottom;
 
-	public int getSize() {
-		return size;
-	}
-
 	public int getFront() {
 		return front;
 	}
 
-	public int getCapacity(){
+	public int getCapacity() {
 		return capacity;
 	}
 
@@ -30,6 +26,7 @@ public class Queue extends Datastructure {
 	public void create() {
 		front = 0;
 		bottom = -1;
+		size = 0;
 	}
 
 	public void createRandom(int newSize) {
@@ -46,7 +43,7 @@ public class Queue extends Datastructure {
 		front = 0;
 		bottom = size - 1;
 	}
-	
+
 	@Override
 	public void insert(int element) {
 		if (size == capacity) {

@@ -5,7 +5,7 @@ import java.util.Random;
 public abstract class Datastructure {
 	protected int size;
 	protected int[] elements;
-	protected int capacity;
+	int capacity;
 
 	public Datastructure(int capa) {
 		capacity = capa;
@@ -50,6 +50,10 @@ public abstract class Datastructure {
 			elements[i] = random.nextInt(100);
 		}
 		size = newSize;
+	}
+
+	public int getSize() {
+		return size;
 	}
 
 	public abstract void display();
