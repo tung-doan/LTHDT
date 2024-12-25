@@ -54,7 +54,7 @@ public class ListScene extends BaseScene {
 		listVisualization.setAlignment(Pos.TOP_LEFT);
 		listVisualization.setPadding(new Insets(5));
 		listVisualization.setPrefWidth(600);  
-        listVisualization.setPrefHeight(100);
+        	listVisualization.setPrefHeight(100);
 
 
 		ScrollPane scrollPane = new ScrollPane(listVisualization);
