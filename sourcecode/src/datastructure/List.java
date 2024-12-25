@@ -103,6 +103,9 @@ public class List extends Datastructure {
 
 	// sort
 	public void sort(boolean ascending) {
+		if (isEmpty()) {
+			throw new IllegalStateException("Cannot sort an empty list.");
+		}
 		if (size <= 1) {
 			return; 
 		}
